@@ -78,15 +78,11 @@ def registrar_incidencia():
         # Recoger los datos desde el formulario
         elemento = request.form["elemento"]
         instalacion = request.form["instalacion"]
-        ubicacion = request.form["ubicacion"]
-        tipo = request.form["tipo"]
-        estado = request.form["estado"]
-        fecha = request.form["fecha"]
-        observaciones = request.form.get("observaciones", "")
+
         
         # Registrar la incidencia y obtener el ID generado
         id_generado = modelo.repositorio_inspector.registrar_incidencia(
-            elemento, instalacion, ubicacion, tipo, estado, fecha, observaciones
+            elemento, instalacion
         )
 
         # Guardar la imagen si se ha enviado
