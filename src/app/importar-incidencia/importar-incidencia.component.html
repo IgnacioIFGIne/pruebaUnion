@@ -1,0 +1,54 @@
+<div class="import-container">
+    <h2 class="import-title">Importar Incidencia desde CSV</h2>
+    
+    <!-- Zona para arrastrar y soltar archivos -->
+    <div 
+      class="drop-zone" 
+      [class.active]="isDragging" 
+      (dragover)="onDragOver($event)" 
+      (dragleave)="onDragLeave($event)" 
+      (drop)="onDrop($event)"
+      (click)="fileInput.click()"
+    >
+      <div class="drop-zone-icon">
+        <i class="material-icons">cloud_upload</i>
+      </div>
+      <p class="drop-zone-text">Arrastra y suelta un archivo CSV aquí</p>
+      <p class="drop-zone-text">o haz clic para seleccionar un archivo</p>
+      <input 
+        #fileInput 
+        type="file" 
+        class="file-input" 
+        accept=".csv" 
+        (change)="onFileSelected($event)"
+      >
+    </div>
+    
+    <!-- Mostrar el archivo seleccionado -->
+    <div class="selected-file" *ngIf="selectedFile">
+      <div style="display: flex; align-items: center;">
+        <i class="material-icons file-icon">description</i>
+        <span class="file-name">{{ selectedFile.name }}</span>
+      </div>
+      <i class="material-icons remove-file" (click)="removeFile()">close</i>
+    </div>
+    
+    <!-- Mensaje de error -->
+    <div class="error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+    
+    <!-- Botones de acción -->
+    <div class="action-buttons">
+      <button class="btn-cancel" (click)="close()">Cancelar</button>
+      <button 
+        class="btn-import" 
+        [disabled]="!selectedFile" 
+        (click)="importarArchivo()"
+      >
+        Importar
+      </button>
+    </div>
+  </div>
+  
+  
